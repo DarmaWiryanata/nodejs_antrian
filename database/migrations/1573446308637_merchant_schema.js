@@ -9,6 +9,9 @@ class MerchantSchema extends Schema {
       table.increments();
       table.string("name");
       table.string("address");
+      table.text("deskripsi");
+      table.string("gambar");
+      table.integer("iduser");
       table.timestamps();
     });
   }

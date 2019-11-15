@@ -17,16 +17,23 @@
 const Route = use("Route");
 
 Route.on("/welcome").render("welcome");
-Route.on("/").render("index");
 Route.on("/about").render("about");
 Route.on("/blog-single").render("blog-single");
 Route.on("/blog").render("blog");
 Route.on("/cart").render("cart");
 Route.on("/checkout").render("checkout");
 Route.on("/contact").render("contact");
-Route.on("/product-single").render("product-single");
 Route.on("/shop").render("shop");
 
-Route.get("/merchants", "MerchantController.index");
-Route.post("/merchants", "MerchantController.store");
-Route.delete("/merchants/:id", "MerchantController.destroy");
+// Route.get("/", "HomeController.index").as("index");
+
+// AuthController
+Route.get('profile', 'AuthController.getProfile').as('profile').middleware(['auth'])
+Route.get('login', 'AuthController.getLogin').as('login')
+Route.post('login', 'AuthController.postLogin').as('login')
+Route.post('logout', 'AuthController.postLogout').as('logout').middleware(['auth'])
+
+// FrontController
+Route.get('/', 'FrontController.index').as('index.antrian')
+Route.post('/store', 'FrontController.store').as('store.antrian').middleware(['auth'])
+Route.get('/submerchant/:id', 'FrontController.show').as('show.antrian')
