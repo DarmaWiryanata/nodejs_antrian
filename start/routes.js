@@ -31,9 +31,17 @@ Route.on("/shop").render("shop");
 Route.get('profile', 'AuthController.getProfile').as('profile').middleware(['auth'])
 Route.get('login', 'AuthController.getLogin').as('login')
 Route.post('login', 'AuthController.postLogin').as('login')
-Route.post('logout', 'AuthController.postLogout').as('logout').middleware(['auth'])
+Route.get('register', 'AuthController.showRegisterForm')
+Route.post('register', 'AuthController.register').as('register')
+Route.get('register/confirm/:token', 'AuthController.confirmEmail')
+Route.get('logout', 'AuthController.postLogout').as('logout').middleware(['auth'])
+Route.get('password/reset', 'AuthController.showLinkRequestForm')
+Route.post('password/email', 'AuthController.sendResetLinkEmail')
+Route.get('password/reset/:token', 'AuthController.showResetForm')
+Route.post('password/reset', 'AuthController.reset')
 
 // FrontController
 Route.get('/', 'FrontController.index').as('index.antrian')
 Route.post('/store', 'FrontController.store').as('store.antrian').middleware(['auth'])
+Route.get('/list', 'FrontController.list').as('list.antrian')
 Route.get('/submerchant/:id', 'FrontController.show').as('show.antrian')
